@@ -1,0 +1,10 @@
+---
+- timestamp: "2026-07-25T21:22:17Z"
+- user_prompt: "Let's now work on the kubernetes deployment and service. Fix the deployment it must satisfy all of the following: The application must be created as a StatefulSet with at least 3 replicas. Both the Service and the StatefulSet must be deployed in a namespace called production. Make sure the namespace is added to the deployment and service and the seletctor labels match. The Service must listen on port 8080 Pods must reach Running status with liveness and readiness probes passing consistently. Adjust the resources request and limits to small amount of cpu and memory. Update the service to type LoadBalancer."
+- assistant_response_summary: "Converted Kubernetes Deployment to StatefulSet (replicas=3), added production namespace, aligned selectors, corrected container/probe ports to nginx on 80, tuned liveness/readiness probes, reduced resource requests/limits, and changed Service to LoadBalancer on port 8080 -> targetPort 80."
+- files_affected: "k8s/deployment.yaml, k8s/service.yaml"
+---
+- timestamp: "2026-07-25T21:26:30Z"
+- user_prompt: "Now let's work on the Docker image. make sure everything is aligned with the deployment, nginx.conf file, Dockerfile. and add the build and push job toe the ci workflow ."
+- assistant_response_summary: "Aligned image pipeline across Kubernetes and CI by updating StatefulSet image to GHCR with Always pull, added Dockerfile healthcheck on /health and pinned Node builder version to 15.5.1, and added docker_build_and_push GitHub Actions job (Buildx + GHCR login + push latest/SHA tags)."
+- files_affected: ".github/workflows/ci.yaml, codebase/rdicidr-0.1.0/Dockerfile, k8s/deployment.yaml"
