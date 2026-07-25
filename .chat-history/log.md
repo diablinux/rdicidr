@@ -18,3 +18,8 @@
 - user_prompt: "Let's add another job that once the build and push job is done with success. it ssh into my aws instance 107.20.41.142 and run a couple of commands to pull the docker image and start it in the required port."
 - assistant_response_summary: "Added deploy_ec2 GitHub Actions job chained after docker_build_and_push success on main push; uses SSH to EC2 host 107.20.41.142 and runs docker pull, container replace, and docker run -d with port mapping 8080:80 for image docker.io/diablinux/rdicidr:v1.0.0."
 - files_affected: ".github/workflows/ci.yaml"
+---
+- timestamp: "2026-07-25T21:58:33Z"
+- user_prompt: "The deploy_ec2 job is being skipped, why?"
+- assistant_response_summary: "Explained that deploy_ec2 is skipped due to explicit if-condition requiring push events on refs/heads/main and dependency on docker_build_and_push; pull_request or feature branch pushes do not satisfy condition."
+- files_affected: "none"
