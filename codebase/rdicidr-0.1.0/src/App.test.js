@@ -8,6 +8,13 @@ test("renders learn react link", () => {
 });
 
 test("displays the API URL", () => {
-  render(<App />);
-  expect(screen.getByText(/api\.rdicidr\.com/i)).toBeInTheDocument();
+  const previousApiUrl = process.env.REACT_APP_API_URL;
+  process.env.REACT_APP_API_URL = "api.rdicidr.com";
+
+  try {
+    render(<App />);
+    expect(screen.getByText(/api\.rdicidr\.com/i)).toBeInTheDocument();
+  } finally {
+    process.env.REACT_APP_API_URL = previousApiUrl;
+  }
 });
