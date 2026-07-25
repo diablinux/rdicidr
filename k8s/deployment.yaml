@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: rdicidr
-          image: docker.io/diabiinux/rdicidr:v1.0.0
+          image: docker.io/diablinux/rdicidr:v1.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 80

@@ -8,3 +8,8 @@
 - user_prompt: "Now let's work on the Docker image. make sure everything is aligned with the deployment, nginx.conf file, Dockerfile. and add the build and push job toe the ci workflow ."
 - assistant_response_summary: "Aligned image pipeline across Kubernetes and CI by updating StatefulSet image to GHCR with Always pull, added Dockerfile healthcheck on /health and pinned Node builder version to 15.5.1, and added docker_build_and_push GitHub Actions job (Buildx + GHCR login + push latest/SHA tags)."
 - files_affected: ".github/workflows/ci.yaml, codebase/rdicidr-0.1.0/Dockerfile, k8s/deployment.yaml"
+---
+- timestamp: "2026-07-25T21:37:50Z"
+- user_prompt: "make sure the image tag is diabiinux/rdicidr:v1.0.0"
+- assistant_response_summary: "Pinned Docker image references to docker.io/diabiinux/rdicidr:v1.0.0 in CI workflow push tags and Kubernetes StatefulSet deployment image for registry/tag consistency."
+- files_affected: ".github/workflows/ci.yaml, k8s/deployment.yaml"
