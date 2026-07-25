@@ -82,3 +82,22 @@ jobs:
           file: codebase/rdicidr-0.1.0/Dockerfile
           push: true
           tags: ${{ env.IMAGE_NAME }}:v1.0.0
+
+  deploy_ec2:
+    runs-on: ubuntu-latest
+    needs:
+      - docker_build_and_push
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Deploy to EC2 over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: 107.20.41.142
+          username: ${{ secrets.EC2_SSH_USER }}
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          port: 22
+          script_stop: true
+          script: |
+            docker pull ${{ env.IMAGE_NAME }}:v1.0.0
+            docker rm -f rdicidr || true
+            docker run -d --name rdicidr --restart unless-stopped -p 8080:80 ${{ env.IMAGE_NAME }}:v1.0.0
